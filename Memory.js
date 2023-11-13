@@ -10,7 +10,7 @@ class Memory {
         this.availableSize = this.totalMemorySize - this.osSize;
         
         // Representation of the physical RAM
-        this.wholeMemory = [];
+        this.wholeMemory = [new Job("OS", this.osSize)];
 
         // Allocate jobs in queue to memory
         this.initialAllocation();
