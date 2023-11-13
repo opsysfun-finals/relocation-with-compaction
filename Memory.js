@@ -36,10 +36,17 @@ class Memory {
         this.wholeMemory.push(new Job("free", this.availableSize));
     }
 
-    // Deallocates jobs in memory
-    deallocate(deallocateList) {
+    /*  
+        Deallocates jobs in memory
+        Don't forget to implement a try catch for when user inputs index beyond array length
+        Also update to disallow the removal of OS 
+    */
+    deallocate(deallocateList) { // indexes of jobs!
         for (let i = 0; i < deallocateList.length; i++) {
-            
+            if (this.wholeMemory[deallocateList[i]].jobName != "free") {
+                this.wholeMemory[deallocateList[i]].jobName = "free";
+                this.availableSize += this.wholeMemory[deallocateList[i]].jobSize;
+            }
         }
     }
 
