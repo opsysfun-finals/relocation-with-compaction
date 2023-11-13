@@ -33,6 +33,7 @@ class Memory {
                 i++;
             }
         }
+        this.wholeMemory.push(new Job("free", this.availableSize));
     }
 
     // Method to show jobs allocated in memory
