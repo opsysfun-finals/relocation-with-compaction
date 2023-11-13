@@ -36,6 +36,13 @@ class Memory {
         this.wholeMemory.push(new Job("free", this.availableSize));
     }
 
+    // Deallocates jobs in memory
+    deallocate(deallocateList) {
+        for (let i = 0; i < deallocateList.length; i++) {
+            
+        }
+    }
+
     // Method to show jobs allocated in memory
     viewMemory() {
         console.log("Memory");
