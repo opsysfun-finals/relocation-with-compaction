@@ -34,6 +34,22 @@ class Memory {
             }
         }
     }
+
+    // Method to show jobs allocated in memory
+    viewMemory() {
+        console.log("Memory");
+        for (let i = 0; i < this.wholeMemory.length; i++) {
+            console.log(this.wholeMemory[i].jobName + " " + this.wholeMemory[i].jobSize);
+        }
+    }
+
+    // Method to show jobs in queue
+    viewQueue() {
+        console.log("Queue");
+        for (let i = 0; i < this.queue.length; i++) {
+            console.log(this.queue[i].jobName + " " + this.queue[i].jobSize);
+        }
+    }
 }
 
 module.exports = Memory;
