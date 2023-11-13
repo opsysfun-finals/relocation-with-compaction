@@ -50,6 +50,31 @@ class Memory {
         }
     }
 
+    /*
+        Compacts free space in memory
+        This code works for some reason
+    */
+    compaction() {
+        let currentJob;
+        let i = 0;
+        let freeInLast = this.wholeMemory.pop();
+
+        while (i < this.wholeMemory.length) {
+            currentJob = this.wholeMemory[i];
+            if (currentJob.jobName === "free") {
+                // Add free space to total available memory
+                //this.availableSize += currentJob.jobSize;
+
+                // Move up the jobs
+                this.wholeMemory = this.wholeMemory.slice(0, i).concat(this.wholeMemory.slice(i+1));
+            } else {
+                i++;
+            }
+        }
+        // Add frame with size of remaining available space
+        this.wholeMemory.push(new Job("free", this.availableSize));
+    }
+
     // Method to show jobs allocated in memory
     viewMemory() {
         console.log("Memory");
