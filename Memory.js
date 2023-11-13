@@ -57,7 +57,11 @@ class Memory {
     compaction() {
         let currentJob;
         let i = 0;
+        
+        /*
         let freeInLast = this.wholeMemory.pop();
+        is this even necessary?????
+        */
 
         while (i < this.wholeMemory.length) {
             currentJob = this.wholeMemory[i];
@@ -73,6 +77,13 @@ class Memory {
         }
         // Add frame with size of remaining available space
         this.wholeMemory.push(new Job("free", this.availableSize));
+    }
+
+    /*
+        Method accepts an array of jobs
+    */
+    allocate() {
+
     }
 
     // Method to show jobs allocated in memory
