@@ -11,8 +11,12 @@ class Memory {
         
         // Representation of the physical RAM
         this.wholeMemory = [];
+
+        // Allocate jobs in queue to memory
+        this.initialAllocation();
     }
 
+    // Method used by constructor
     initialAllocation() {
         // Iterate through the queue
         let i = 0;
@@ -23,7 +27,6 @@ class Memory {
                 this.wholeMemory.push(this.queue[i]);
 
                 // Dequeue job
-                // this.waitingQueue = this.waitingQueue.slice(0, idx).concat(this.wholeMemory.slice(idx+1));
                 this.availableSize -= this.queue[i].jobSize;
                 this.queue = this.queue.slice(0, i).concat(this.queue.slice(i+1));
             } else {
