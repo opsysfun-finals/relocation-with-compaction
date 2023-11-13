@@ -4,3 +4,5 @@ class Job {
         this.jobSize = jobSize;
     }
 }
+
+module.exports = Job;
