@@ -22,7 +22,7 @@ class Memory {
         let i = 0;
         while (i < this.queue.length) {
             // Determine if job can fit in memory
-            if (this.queue[i].jobSize < this.availableSize) {
+            if (this.queue[i].jobSize <= this.availableSize) {
                 // push to memory if it can fit
                 this.wholeMemory.push(this.queue[i]);
 
@@ -42,10 +42,12 @@ class Memory {
         Also update to disallow the removal of OS 
     */
     deallocate(deallocateList) { // indexes of jobs!
+        let currentIndex;
         for (let i = 0; i < deallocateList.length; i++) {
-            if (this.wholeMemory[deallocateList[i]].jobName != "free") {
-                this.wholeMemory[deallocateList[i]].jobName = "free";
-                this.availableSize += this.wholeMemory[deallocateList[i]].jobSize;
+            currentIndex = deallocateList[i]
+            if (this.wholeMemory[currentIndex].jobName != "free") {
+                this.wholeMemory[currentIndex].jobName = "free";
+                this.availableSize += this.wholeMemory[currentIndex].jobSize;
             }
         }
     }
