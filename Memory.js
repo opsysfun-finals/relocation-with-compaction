@@ -87,30 +87,32 @@ class Memory {
     allocate() {
         let i = 0;
         let currentJob;
+        let freePart;
         // Iterate through the queue
         while (i < this.queue.length) {
             currentJob = this.queue[i];
 
             // Check if currentJob can fit in the memory
-            if (currentJob.jobSize < this.availableSize) {
+            if (currentJob.jobSize <= this.availableSize) {
+                // Remove the free space at the end of the memory
+                freePart = this.wholeMemory.pop();
+
                 this.wholeMemory.push(currentJob);
 
                 // Remove currentJob from queue
                 this.queue = this.queue.splice(0, i).concat(this.queue.splice(i+1));
+
+                // Decrease total free space of memory
+                this.availableSize -= currentJob.jobSize;
+
+                freePart.jobSize = this.availableSize;
+                this.wholeMemory.push(freePart);
                 
             // If job does not fit increment to next job
             } else {
                 i++;
             }
         }
-        /*
-        for (let i = 0; i < this.queue.length; i++) {
-            let currentJob = this.queue[i];
-            if (currentJob.jobSize < this.availableSize) {
-                this.wholeMemory.push(currentJob);
-            }
-        }
-        */
     }
 
     // Method to show jobs allocated in memory
