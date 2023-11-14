@@ -77,13 +77,40 @@ class Memory {
         }
         // Add frame with size of remaining available space
         this.wholeMemory.push(new Job("free", this.availableSize));
+
+        this.allocate();
     }
 
     /*
         Method accepts an array of jobs
     */
     allocate() {
+        let i = 0;
+        let currentJob;
+        // Iterate through the queue
+        while (i < this.queue.length) {
+            currentJob = this.queue[i];
 
+            // Check if currentJob can fit in the memory
+            if (currentJob.jobSize < this.availableSize) {
+                this.wholeMemory.push(currentJob);
+
+                // Remove currentJob from queue
+                this.queue = this.queue.splice(0, i).concat(this.queue.splice(i+1));
+                
+            // If job does not fit increment to next job
+            } else {
+                i++;
+            }
+        }
+        /*
+        for (let i = 0; i < this.queue.length; i++) {
+            let currentJob = this.queue[i];
+            if (currentJob.jobSize < this.availableSize) {
+                this.wholeMemory.push(currentJob);
+            }
+        }
+        */
     }
 
     // Method to show jobs allocated in memory
